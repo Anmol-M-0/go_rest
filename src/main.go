@@ -1,7 +1,9 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"io/ioutil"
 
 	"github.com/gin-gonic/gin"
 )
@@ -59,6 +61,20 @@ func PathParameters(c *gin.Context) {
 		"age":  age,
 	})
 }
+func ReadPost(c *gin.Context) {
+	body := c.Request.Body
+	value, err := ioutil.ReadAll(body)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": errors.New("an error occured, that's all we know"),
+		})
+	} else {
+		c.JSON(200, gin.H{
+			"message": string(value),
+		})
+	}
+
+}
 
 func main() {
 	fmt.Println("hello world")
@@ -76,5 +92,7 @@ func main() {
 	r.GET("/query", QueryStrings)             // /query?name=anmol&age=24
 	r.GET("/path/:name/:age", PathParameters) // /path/anmol/24
 
+	//reading the body of a post request
+	r.POST("/read", ReadPost) //read from te body of post req
 	r.Run()
 }
