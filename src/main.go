@@ -42,6 +42,24 @@ func OptionsHomePage(c *gin.Context) {
 		"message": "Options Home Page",
 	})
 }
+
+func QueryStrings(c *gin.Context) {
+	name := c.Query("name")
+	age := c.Query("age")
+	c.JSON(200, gin.H{
+		"name": name,
+		"age":  age,
+	})
+}
+func PathParameters(c *gin.Context) {
+	name := c.Param("name")
+	age := c.Param("age")
+	c.JSON(200, gin.H{
+		"name": name,
+		"age":  age,
+	})
+}
+
 func main() {
 	fmt.Println("hello world")
 	r := gin.Default()
@@ -52,5 +70,11 @@ func main() {
 	r.PATCH("/", PatchHomePage)
 	r.HEAD("/", HeadHomePage)
 	r.OPTIONS("/", OptionsHomePage)
+	//query strings, path params body of post request
+
+	//query strings
+	r.GET("/query", QueryStrings)             // /query?name=anmol&age=24
+	r.GET("/path/:name/:age", PathParameters) // /path/anmol/24
+
 	r.Run()
 }
