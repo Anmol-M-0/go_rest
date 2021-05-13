@@ -8,43 +8,65 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//a simple post end point
+//returns a json {message: {message}}
 func PostHomePage(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "Post Home Page",
 	})
 }
+
+//a simple get end point
+//returns a json {message: {message}}
 func HomePage(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "Home page",
 	})
 }
+
+//a simple put end point
+//returns a json {message: {message}}
 func PutHomePage(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "Put Home Page",
 	})
 }
+
+//a simple delete end point
+//returns a json {message: {message}}
 func DeleteHomePage(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "delete Home Page",
 	})
 }
+
+//a simple patch end point
+//returns a json {message: {message}}
 func PatchHomePage(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "Patch Home Page",
 	})
 }
+
+//a simple head end point
 func HeadHomePage(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "Head Home Page",
 	})
 	// fmt.Println("in head")
 }
+
+//a simple options end point
+//returns a json {message: {message}}
 func OptionsHomePage(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "Options Home Page",
 	})
 }
 
+//a get end point, /query?name={name}&age={age}
+//to test out query params
+//returns a json {name: {name}, age:{age}}
 func QueryStrings(c *gin.Context) {
 	name := c.Query("name")
 	age := c.Query("age")
@@ -53,6 +75,10 @@ func QueryStrings(c *gin.Context) {
 		"age":  age,
 	})
 }
+
+//a get end point, /path/:{name}/:{age}
+//to test out path params
+//returns a json {name: {name}, age:{age}}
 func PathParameters(c *gin.Context) {
 	name := c.Param("name")
 	age := c.Param("age")
@@ -61,6 +87,9 @@ func PathParameters(c *gin.Context) {
 		"age":  age,
 	})
 }
+
+//a post end point, /read, that reads the content of the body and returns
+//that in the form of json {"message":{body}}
 func ReadPost(c *gin.Context) {
 	body := c.Request.Body
 	value, err := ioutil.ReadAll(body)
