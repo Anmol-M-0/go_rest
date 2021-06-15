@@ -1,3 +1,3 @@
 # GO REST
 ## Intent
-Starter code for making RESTful applications using gin-gonic package, for begineers. 
+Starter code for making REST applications using gin-gonic package, for begineers. 
